@@ -1,0 +1,23 @@
+{
+  "name": "node-thrift-hbase",
+  "version": "0.0.1",
+  "description": "init node-thrift-hbase",
+  "main": "",
+  "dependencies": {
+    "thrift": "0.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rubinus/node-thrift-hbase.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rubinus/node-thrift-hbase/issues"
+  },
+  "homepage": "https://github.com/rubinus/node-thrift-hbase"
+}
