@@ -10,11 +10,11 @@ connection.on('connect', function () {
   
   var tPut = new HBaseTypes.TPut({row: 'TheRealMT',
     columnValues: [
-    new HBaseTypes.TColumnValue({family: 'info', qualifier: 'hobbies', value: 'music'}),
-    new HBaseTypes.TColumnValue({family: 'info', qualifier: 'name', value: 'Thomas Zhang'})
+    new HBaseTypes.TColumnValue({family: 'ip', qualifier: 'hobbies', value: 'wwwwwwwww'}),
+    new HBaseTypes.TColumnValue({family: 'ip', qualifier: 'name', value: 'wwwwwwwwww'})
     ]});
 	
-  client.put('users', tPut, function (err) {
+  client.put('logs', tPut, function (err) {
 	  
     if (err) {
       console.log(err);

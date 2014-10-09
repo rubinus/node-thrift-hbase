@@ -1,10 +1,11 @@
 {
   "name": "node-thrift-hbase",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "init node-thrift-hbase",
   "main": "",
   "dependencies": {
-    "thrift": "0.9.1"
+    "thrift": "0.9.1",
+    "node-int64": "0.3.1"
   },
   "devDependencies": {},
   "scripts": {

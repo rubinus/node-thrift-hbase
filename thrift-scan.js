@@ -10,6 +10,7 @@ connection.on('connect', function () {
 
   var tScanner = new HBaseTypes.TScan({startRow: 'TheRealMT',
     columns: [new HBaseTypes.TColumn({family: 'info'})]});
+    
   client.openScanner('users', tScanner, function (err, scannerId) {
     if (err) {
       console.log(err);
@@ -21,7 +22,7 @@ connection.on('connect', function () {
         console.log(serr);
         return;
       }
-      console.log(data);
+      console.log(data,data[0].columnValues);
     });
     client.closeScanner(scannerId, function (err) {
       if (err) {
