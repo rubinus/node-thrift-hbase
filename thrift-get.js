@@ -2,7 +2,7 @@ var thrift = require('thrift');
 var HBase = require('./gen-nodejs/THBaseService');
 var HBaseTypes = require('./gen-nodejs/hbase_types');
 
-var connection = thrift.createConnection('localhost', 9090);
+var connection = thrift.createConnection('master', 9090);
 
 connection.on('connect', function () {
   console.log('connected');
