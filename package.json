@@ -2,7 +2,7 @@
   "name": "node-thrift-hbase",
   "version": "0.0.5",
   "description": "init node-thrift-hbase",
-  "main": "",
+  "main": "index.js",
   "dependencies": {
     "thrift": "0.9.1",
     "node-int64": "0.3.1"
