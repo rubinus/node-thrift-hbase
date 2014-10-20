@@ -10,4 +10,4 @@
 
 var Client = require('./lib/client');
 
-exports.create = Client.create;
+exports.client = Client.create;

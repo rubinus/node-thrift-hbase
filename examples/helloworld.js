@@ -8,10 +8,13 @@ var config = {
     port: 9090
 };
 
-var client = HBase.create(config);
+var client = HBase.client(config);
 //client.getClient(function(err,data){
 //    console.log(err,data);
 //});
+//var client1 = HBase.create(config);
+
+//console.log(client.suiji,client1.suiji);
 
 client.get(function(err,data){
     console.log(err,data);
