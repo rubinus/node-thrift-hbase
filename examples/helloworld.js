@@ -3,9 +3,17 @@
  */
 var HBase = require('../');
 
-var config = {};
-var client = HBase.create(config);
+var config = {
+    host: 'master',
+    port: 9090
+};
 
-client.get('3333',function(reply){
-    console.log(reply);
+var client = HBase.create(config);
+//client.getClient(function(err,data){
+//    console.log(err,data);
+//});
+
+client.get(function(err,data){
+    console.log(err,data);
 });
+
