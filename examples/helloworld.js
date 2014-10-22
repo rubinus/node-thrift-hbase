@@ -8,15 +8,23 @@ var config = {
     port: 9090
 };
 
-var client = HBase.client(config);
-//client.getClient(function(err,data){
-//    console.log(err,data);
-//});
-//var client1 = HBase.create(config);
+var hbaseClient = HBase.client(config);
 
-//console.log(client.suiji,client1.suiji);
 
-client.get(function(err,data){
+var param = new hbaseClient.Get('TheRealMT');
+//param.addFamily('cf');
+//param.addColumn('info','name');
+//param.addColumn('info','tel');
+param.setMaxVersions(1);
+
+//console.log(param);
+
+hbaseClient.get('users',param,function(err,data){
+    if(err){
+        console.log(err);
+        return;
+    }
+
     console.log(err,data);
 });
 
