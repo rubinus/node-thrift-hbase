@@ -13,8 +13,11 @@ thrift --gen js:node /install/hbase-0.98.5/hbase-thrift/src/main/resources/org/a
 var HBase = require('node-thrift-hbase');
 
 var config = {
+
     host: 'master',
+
     port: 9090
+
 };
 
 var hbaseClient = HBase.client(config);
@@ -30,9 +33,15 @@ get.addColumn('info','name');
 get.setMaxVersions(1);
 
 hbaseClient.get('users',get,function(err,data){ //get users table
+
     if(err){
+
         console.log('error:',err);
+
         return;
+
     }
+
     console.log(err,data);
+
 });
