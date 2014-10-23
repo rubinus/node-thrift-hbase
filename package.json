@@ -1,6 +1,6 @@
 {
   "name": "node-thrift-hbase",
-  "version": "0.0.9",
+  "version": "0.10.0",
   "description": "node-thrift-hbase",
   "main": "index.js",
   "dependencies": {
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/rubinus/node-thrift-hbase.git"
   },
-  "author": "",
+  "author": "rubinus.chu@gmail.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rubinus/node-thrift-hbase/issues"
