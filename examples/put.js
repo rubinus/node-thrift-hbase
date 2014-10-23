@@ -10,11 +10,15 @@ var config = {
 
 var hbaseClient = HBase.client(config);
 
-hbaseClient.getRow('users','row1',['info'],1,function(err,data){ //get users table
+var put = hbaseClient.Put('row1');    //row1 is rowKey
+
+put.add('info','address','beijing');
+
+hbaseClient.put('users',put,function(err){ //put users table
     if(err){
         console.log('error:',err);
         return;
     }
-    console.log(err,data);
+    console.log(err,'put is successfully');
 });
 

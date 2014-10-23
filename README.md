@@ -1,11 +1,10 @@
 
 ![](http://dailyjs.com/images/posts/nodehbase.png)
 
-init node-thrift-hbase
+already run this command
 
 thrift --gen js:node /install/hbase-0.98.5/hbase-thrift/src/main/resources/org/apache/hadoop/hbase/thrift2/hbase.thrift
 
-初始化node-thrift-hbase
 
 使用thrift2来操作hbase的CRUD
 
@@ -23,6 +22,8 @@ var config = {
 var hbaseClient = HBase.client(config);
 
 1.=============
+
+**get(table,get,callback)**
 
 var get = hbaseClient.Get('TheRealMT');    //TheRealMT is rowKey
 
@@ -49,6 +50,8 @@ hbaseClient.get('users',get,function(err,data){ //get users table
 });
 
 2.========
+
+**getRow = (table,row,columns,versions,callback)**
 
 hbaseClient.getRow = function (table,row,columns,versions,callback) {
 
@@ -119,3 +122,24 @@ hbaseClient.getRow('users','row1',['info:name','ecf'], 2 ,function(err,data){ //
 //['info:name','ecf'] is rigth too, info is family , ecf is family
 
 //function is callback function
+
+
+**put(table, put, callback)**
+
+var put = hbaseClient.Put('row1');    //row1 is rowKey
+
+put.add('info','address','beijing');
+
+hbaseClient.put('users',put,function(err){ //put users table
+
+    if(err){
+
+        console.log('error:',err);
+
+        return;
+
+    }
+
+    console.log(err,'put is successfully');
+
+});
