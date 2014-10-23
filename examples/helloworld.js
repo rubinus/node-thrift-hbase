@@ -10,14 +10,13 @@ var config = {
 
 var hbaseClient = HBase.client(config);
 
-var get = hbaseClient.Get('domain.100');    //domain.100 is rowKey
-//get.addFamily('cf');
-get.addColumn('ip','ip');
-get.addColumn('ip','site');
+var get = hbaseClient.Get('TheRealMT');    //TheRealMT is rowKey
+//get.addFamily('cf');  //add not found column is error
+get.addColumn('info','name');
 //get.addColumn('info','hobbies');
 get.setMaxVersions(1);
 
-hbaseClient.get('logs',get,function(err,data){
+hbaseClient.get('users',get,function(err,data){ //get users table
     if(err){
         console.log('error:',err);
         return;
