@@ -3,7 +3,7 @@
 
 
 #使用thrift2来操作hbase的CRUD
-
+<br>
 
 ##Get ready for start hadoop hbase thrift2
 
@@ -74,20 +74,20 @@ hbaseClient.get('users',get,function(err,data){
 
 ```
 
-##getRow(table,row,columns,versions,callback)##
+##getRow(table,rowKey,columns,versions,callback)##
 <br>
 
 ###introduce getRow function###
-* hbaseClient.getRow = function (table,row,columns,versions,callback) { 
+* hbaseClient.getRow = function (table,rowKey,columns,versions,callback) { 
 
     * //table is must
-    * //row is must
+    * //rowKey is must
     * //columns is not must,the default is get all row value
     * //versions is not must, the default is 1 ,if have this params,string is auto cost number
 * }
 
 ------
-###getRow( table, row, callback)###
+###getRow( table, rowKey, callback)###
 
 ```javascript
 hbaseClient.getRow('users','row1',function(err,data){ 
@@ -106,7 +106,7 @@ hbaseClient.getRow('users','row1',function(err,data){
 
 ----
 
-###getRow( table, row, columns, callback)###
+###getRow( table, rowKey, columns, callback)###
 
 ```javascript
 
@@ -126,7 +126,7 @@ hbaseClient.getRow('users','row1',['info:name','ecf'],function(err,data){
 
 ----
 
-###getRow( table, row, columns, versions, callback)###
+###getRow( table, rowKey, columns, versions, callback)###
 
 
 ```javascript
