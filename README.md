@@ -307,12 +307,12 @@ var del = hbaseClient.Del('row1');    //row1 is rowKey
 //or Recommend this function add
 
 del.add('info');    //delete all family info
-del.add('info','click2');   //delete family and qualifier info:click2
-del.add('info','click3',1414136046864); //delete info:click3 and timestamp
+del.add('info','name');   //delete family and qualifier info:name
+del.add('info','tel',1414136046864); //delete info:tel and timestamp
 
 del.add('ecf'); //delete other family ecf
-del.add('ecf','net1');  //delete family and qualifier ecf:net1
-del.add('ecf','net2',1414136119207); //delete info:click3 and timestamp
+del.add('ecf','name');  //delete family and qualifier ecf:name
+del.add('ecf','tel',1414136119207); //delete info:tel and timestamp
 
 //del.add('ips'); //is error ,because this family ips is not exist
 
@@ -321,6 +321,24 @@ hbaseClient.del('users',del,function(err){ //put users table
         console.log('error:',err);
         return;
     }
+    console.log(err,'del is successfully');
+});
+
+```
+
+##delRow( table, rowKey, family:qualifier, callback)##
+<br>
+
+```javascript
+
+hbaseClient.delRow('users','row1','info:name',function(err){ 
+    //put users table
+    
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    
     console.log(err,'del is successfully');
 });
 
