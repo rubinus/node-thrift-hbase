@@ -8,7 +8,7 @@ connection.on('connect', function () {
   console.log('connected');
   var client = thrift.createClient(HBase, connection);
 
-  var tScanner = new HBaseTypes.TScan({startRow: 'TheRealMT',
+  var tScanner = new HBaseTypes.TScan({startRow: 'row1',
     columns: [new HBaseTypes.TColumn({family: 'info'})]});
     
   client.openScanner('users', tScanner, function (err, scannerId) {
@@ -22,7 +22,7 @@ connection.on('connect', function () {
         console.log(serr);
         return;
       }
-      console.log(data,data[0].columnValues);
+      console.log(data);
     });
     client.closeScanner(scannerId, function (err) {
       if (err) {

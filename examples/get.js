@@ -13,7 +13,7 @@ var hbaseClient = HBase.client(config);
 var get = hbaseClient.Get('row1');    //row1 is rowKey
 //get.addFamily('cf');  //add not found column is error
 get.addColumn('info','name');
-//get.addColumn('info','counter');
+get.addColumn('info','tel');
 get.setMaxVersions(1);
 
 hbaseClient.get('users',get,function(err,data){ //get users table

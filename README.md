@@ -2,7 +2,7 @@
 ![](http://dailyjs.com/images/posts/nodehbase.png)
 
 
-#使用thrift2来操作hbase的CRUD#
+#Use thrift2 to CRUD for hbase#
 <br>
 
 ##Get ready for start hadoop hbase thrift2
@@ -56,7 +56,7 @@ var get = hbaseClient.Get('row1');    //row1 is rowKey
 
 get.addColumn('info','name');
 
-//get.addColumn('info','tel');
+get.addColumn('info','tel');
 
 get.setMaxVersions(1);  //default is 1
 
@@ -235,7 +235,7 @@ hbaseClient.putRow('users','row1','info:name','phoneqq.com',1414140874929,functi
 
 * //row1 is rowKey
 
-* //'info:name' is right. info is family, name and tel is qualifier
+* //'info:name' is right. info is family, name is qualifier
 
 * //function is callback function
 
@@ -255,6 +255,8 @@ hbaseClient.putRow('users','row1','info:name','phoneqq.com',1414140874929,functi
 var inc = hbaseClient.Inc('row1');    //row1 is rowKey
 
 inc.add('info','counter');
+
+inc.add('info','counter2');
 
 hbaseClient.inc('users',inc,function(err,data){ 
     //inc users table
