@@ -27,7 +27,7 @@ if you run command display by : jps
 
 2513 SecondaryNameNode
 
-
+###create Hbase instance client###
 
 var HBase = require('node-thrift-hbase');
 
