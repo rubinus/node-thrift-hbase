@@ -198,7 +198,50 @@ hbaseClient.put('users',put,function(err){ //put users table
 
 * timestamp is now Date() and this value also by coustom
 
-##putRow is comming ......
+##putRow(table,row,columns,value,callback)##
+
+```javascript
+
+hbaseClient.putRow('users','row1','info:name','phoneqq.com',function(err){ 
+    //put users table
+    
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    
+    console.log(err,'put is successfully');
+});
+
+```
+
+##putRow(table,row,columns,value,timestamp,callback)##
+
+```javascript
+
+hbaseClient.putRow('users','row1','info:name','phoneqq.com',1414140874929,function(err){ 
+    //put users table
+    
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    
+    console.log(err,'put is successfully');
+});
+
+```
+* //'users' is table name
+
+* //row1 is rowKey
+
+* //'info:name' is right. info is family, name and tel is qualifier
+
+* //function is callback function
+
+* //phoneqq.com is value
+ 
+* //1414140874929 is timestamp ,not must,if not so auto generate new Date()
 
 <br>
 #4 . Use inc or incRow function to update data
