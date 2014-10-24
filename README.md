@@ -5,7 +5,7 @@
 #使用thrift2来操作hbase的CRUD
 
 
-###start hadoop hbase thrift2
+##Get ready for start hadoop hbase thrift2
 
 * start-dfs.sh
 
@@ -13,7 +13,7 @@
 
 * hbase-daemon.sh start thrift2
 
-if you run command display by : jps
+####if you run command example display by : jps
 
 2423 DataNode
 
@@ -27,8 +27,10 @@ if you run command display by : jps
 
 2513 SecondaryNameNode
 
-###create Hbase instance client###
 
+##1 . create Hbase instance client##
+
+```javascript
 var HBase = require('node-thrift-hbase');
 
 var config = {
@@ -41,113 +43,130 @@ var config = {
 
 var hbaseClient = HBase.client(config);
 
-1.=============
+```
+#2 . Use get or getRow function to query data
 
-##get(table,get,callback)##
+##get(table,get,callback)## 
+<br>
 
-var get = hbaseClient.Get('TheRealMT');    //TheRealMT is rowKey
+```javascript
+var get = hbaseClient.Get('row1');    //row1 is rowKey
 
 //get.addFamily('cf');  //add not found column is error
 
 get.addColumn('info','name');
 
-//get.addColumn('info','hobbies');
+//get.addColumn('info','tel');
 
-get.setMaxVersions(1);
+get.setMaxVersions(1);  //default is 1
 
-hbaseClient.get('users',get,function(err,data){ //get users table
+hbaseClient.get('users',get,function(err,data){ 
+    //get users table
 
     if(err){
-
         console.log('error:',err);
-
         return;
-
     }
-
+    
     console.log(err,data);
 
 });
 
-2.========
+```
 
-##getRow = (table,row,columns,versions,callback)##
+##getRow(table,row,columns,versions,callback)##
+<br>
 
-hbaseClient.getRow = function (table,row,columns,versions,callback) {
+###introduce getRow function###
+* hbaseClient.getRow = function (table,row,columns,versions,callback) { 
 
-    //table is must
-    //row is must
-    //columns is not must,the default is get all row value
-    //versions is not must, the default is 1 ,if have this params,string is auto cost number
-
-}
+    * //table is must
+    * //row is must
+    * //columns is not must,the default is get all row value
+    * //versions is not must, the default is 1 ,if have this params,string is auto cost number
+* }
 
 ------
+###getRow( table, row, callback)###
 
-hbaseClient.getRow('users','row1',function(err,data){ //get users table
+```javascript
+hbaseClient.getRow('users','row1',function(err,data){ 
+    //get users table
 
     if(err){
-
         console.log('error:',err);
-
         return;
-
     }
 
     console.log(err,data);
 
 });
+
+```
 
 ----
 
-hbaseClient.getRow('users','row1',['info:name','ecf'],function(err,data){ //get users table
+###getRow( table, row, columns, callback)###
+
+```javascript
+
+hbaseClient.getRow('users','row1',['info:name','ecf'],function(err,data){ 
+    //get users table
 
     if(err){
-
         console.log('error:',err);
-
         return;
-
     }
 
     console.log(err,data);
 
 });
+
+```
 
 ----
 
-hbaseClient.getRow('users','row1',['info:name','ecf'], 2 ,function(err,data){ //get users table
+###getRow( table, row, columns, versions, callback)###
+
+
+```javascript
+
+hbaseClient.getRow('users','row1',['info:name','ecf'], 2 ,function(err,data){ 
+    //get users table
 
     if(err){
-
         console.log('error:',err);
-
         return;
-
     }
 
     console.log(err,data);
 
 });
 
+```
 
-//'users' is table name
+* //'users' is table name
 
-//row1 is rowKey
+* //row1 is rowKey
 
-//[] is family or family qualifier
+* //[] is family or family qualifier
 
-//['info:name','info:tel'] is right. info is family, name and tel is qualifier
+* //['info:name','info:tel'] is right. info is family, name and tel is qualifier
 
-//['info:name','ecf'] is rigth too, info is family , ecf is family
+* //['info:name','ecf'] is rigth too, info is family , ecf is family
 
-//function is callback function
+* //function is callback function
 
-//2 is Maxversion ,default is 1
+* //2 is Maxversion ,default is 1
 
+<br>
+#3 . Use put or putRow function to insert or update data
+<br>
 
-##put(table, put, callback)##
+##put( table, put, callback)##
+<br>
 
+```javascript
 var put = hbaseClient.Put('row1');    //row1 is rowKey
 
 put.add('info','address','beijing');
@@ -166,45 +185,59 @@ hbaseClient.put('users',put,function(err){ //put users table
 
 });
 
-//info is family
+```
+* //info is family
 
-//address is qualifier
+* //address is qualifier
 
-//beijing is value
+* //beijing is value
 
-##inc(table, inc, callback)##
+##putRow is comming ......
+
+<br>
+#4 . Use inc or incRow function to update data
+<br>
+
+##inc( table, inc, callback)##
+<br>
+
+```javascript
 
 var inc = hbaseClient.Inc('row1');    //row1 is rowKey
 
 inc.add('info','counter');
 
-hbaseClient.inc('users',inc,function(err,data){ //inc users table
+hbaseClient.inc('users',inc,function(err,data){ 
+    //inc users table
 
     if(err){
-
         console.log('error:',err);
-
         return;
-
     }
 
     console.log(err,data);
 
 });
 
+```
 
-##incRow(table,rowKey,family:qualifier,callback)##
+##incRow( table, rowKey, family:qualifier, callback)##
+<br>
+
+```javascript
 
 hbaseClient.incRow('users','row1','info:counter',function(err,data){ //inc users table
 
     if(err){
-
         console.log('error:',err);
-
         return;
-
     }
 
     console.log(err,data);
     //data is return new counter object
 });
+
+```
+
+<br>
+<br>
