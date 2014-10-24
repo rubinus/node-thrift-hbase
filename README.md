@@ -2,7 +2,7 @@
 ![](http://dailyjs.com/images/posts/nodehbase.png)
 
 
-#使用thrift2来操作hbase的CRUD
+#使用thrift2来操作hbase的CRUD#
 <br>
 
 ##Get ready for start hadoop hbase thrift2
@@ -13,7 +13,7 @@
 
 * hbase-daemon.sh start thrift2
 
-####if you run command example display by : jps
+####if you run command example display by : jps####
 
 2423 DataNode
 
@@ -169,7 +169,11 @@ hbaseClient.getRow('users','row1',['info:name','ecf'], 2 ,function(err,data){
 ```javascript
 var put = hbaseClient.Put('row1');    //row1 is rowKey
 
-put.add('info','address','beijing');
+put.add('info','click','100'); // 100 must be string
+
+put.add('info','name','beijing',new Date().getTime());
+
+put.add('ecf','name','zhudaxian');
 
 hbaseClient.put('users',put,function(err){ //put users table
 
@@ -186,11 +190,13 @@ hbaseClient.put('users',put,function(err){ //put users table
 });
 
 ```
-* //info is family
+* //info and ecf are family
 
-* //address is qualifier
+* //click and name is qualifier
 
 * //beijing is value
+
+* timestamp is now Date() and this value also by coustom
 
 ##putRow is comming ......
 
@@ -235,6 +241,60 @@ hbaseClient.incRow('users','row1','info:counter',function(err,data){ //inc users
 
     console.log(err,data);
     //data is return new counter object
+});
+
+```
+
+<br>
+#5 . Use del or delRow function to delete data
+<br>
+
+##del( table, del, callback)##
+
+```javascript
+
+var del = hbaseClient.Del('row1');    //row1 is rowKey
+
+//del.addFamily('ips');   //delete family ips
+//del.addColumn('info','click2'); //delete family and qualifier info:click2
+//del.addTimestamp('info','click3',1414136046864); //delete info:click3 and timestamp
+
+//or Recommend this function add
+
+del.add('info');    //delete all family info
+del.add('info','click2');   //delete family and qualifier info:click2
+del.add('info','click3',1414136046864); //delete info:click3 and timestamp
+
+del.add('ecf'); //delete other family ecf
+del.add('ecf','net1');  //delete family and qualifier ecf:net1
+del.add('ecf','net2',1414136119207); //delete info:click3 and timestamp
+
+//del.add('ips'); //is error ,because this family ips is not exist
+
+hbaseClient.del('users',del,function(err){ //put users table
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    console.log(err,'del is successfully');
+});
+
+```
+
+##delRow( table, rowKey, family:qualifier, timestamp, callback)##
+<br>
+
+```javascript
+
+hbaseClient.delRow('users','row1','info:name',1414137991649,function(err){ 
+    //put users table
+    
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    
+    console.log(err,'del is successfully');
 });
 
 ```
