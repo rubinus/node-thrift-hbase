@@ -1,12 +1,32 @@
 
 ![](http://dailyjs.com/images/posts/nodehbase.png)
 
-already run this command
-
-thrift --gen js:node /install/hbase-0.98.5/hbase-thrift/src/main/resources/org/apache/hadoop/hbase/thrift2/hbase.thrift
-
 
 #使用thrift2来操作hbase的CRUD
+
+
+###start hadoop hbase thrift2
+
+* start-dfs.sh
+
+* start-hbase.sh
+
+* hbase-daemon.sh start thrift2
+
+if you run command display by : jps
+
+2423 DataNode
+
+2746 ThriftServer
+
+4854 Jps
+
+2349 NameNode
+
+2668 HMaster
+
+2513 SecondaryNameNode
+
 
 
 var HBase = require('node-thrift-hbase');

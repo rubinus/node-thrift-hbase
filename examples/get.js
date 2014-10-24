@@ -26,3 +26,8 @@ hbaseClient.get('users',get,function(err,data){ //get users table
 //    console.log(err,data.columnValues[0].value);
 });
 
+
+//already run this command
+
+//thrift --gen js:node /install/hbase-0.98.5/hbase-thrift/src/main/resources/org/apache/hadoop/hbase/thrift2/hbase.thrift
+
