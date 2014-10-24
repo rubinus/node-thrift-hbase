@@ -46,7 +46,7 @@ var hbaseClient = HBase.client(config);
 ```
 #2 . Use get or getRow function to query data
 
-##get(table,get,callback)## 
+##get(table,get,callback)
 <br>
 
 ```javascript
