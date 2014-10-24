@@ -6,7 +6,7 @@ already run this command
 thrift --gen js:node /install/hbase-0.98.5/hbase-thrift/src/main/resources/org/apache/hadoop/hbase/thrift2/hbase.thrift
 
 
-使用thrift2来操作hbase的CRUD
+#使用thrift2来操作hbase的CRUD
 
 
 var HBase = require('node-thrift-hbase');
@@ -23,7 +23,7 @@ var hbaseClient = HBase.client(config);
 
 1.=============
 
-**get(table,get,callback)**
+##get(table,get,callback)##
 
 var get = hbaseClient.Get('TheRealMT');    //TheRealMT is rowKey
 
@@ -51,7 +51,7 @@ hbaseClient.get('users',get,function(err,data){ //get users table
 
 2.========
 
-**getRow = (table,row,columns,versions,callback)**
+##getRow = (table,row,columns,versions,callback)##
 
 hbaseClient.getRow = function (table,row,columns,versions,callback) {
 
@@ -123,8 +123,10 @@ hbaseClient.getRow('users','row1',['info:name','ecf'], 2 ,function(err,data){ //
 
 //function is callback function
 
+//2 is Maxversion ,default is 1
 
-**put(table, put, callback)**
+
+##put(table, put, callback)##
 
 var put = hbaseClient.Put('row1');    //row1 is rowKey
 
@@ -142,4 +144,47 @@ hbaseClient.put('users',put,function(err){ //put users table
 
     console.log(err,'put is successfully');
 
+});
+
+//info is family
+
+//address is qualifier
+
+//beijing is value
+
+##inc(table, inc, callback)##
+
+var inc = hbaseClient.Inc('row1');    //row1 is rowKey
+
+inc.add('info','counter');
+
+hbaseClient.inc('users',inc,function(err,data){ //inc users table
+
+    if(err){
+
+        console.log('error:',err);
+
+        return;
+
+    }
+
+    console.log(err,data);
+
+});
+
+
+##incRow(table,rowKey,family:qualifier,callback)##
+
+hbaseClient.incRow('users','row1','info:counter',function(err,data){ //inc users table
+
+    if(err){
+
+        console.log('error:',err);
+
+        return;
+
+    }
+
+    console.log(err,data);
+    //data is return new counter object
 });

@@ -12,7 +12,8 @@ var hbaseClient = HBase.client(config);
 
 var put = hbaseClient.Put('row1');    //row1 is rowKey
 
-put.add('info','address','beijing');
+put.add('info','click','100'); // 100 must be string
+//put.add('info','address','beijing',new Date().getTime());
 
 hbaseClient.put('users',put,function(err){ //put users table
     if(err){
