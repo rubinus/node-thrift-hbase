@@ -54,11 +54,16 @@ var get = hbaseClient.Get('row1');    //row1 is rowKey
 
 //get.addFamily('cf');  //add not found column is error
 
-get.addColumn('info','name');
+get.addFamily('info');
 
-get.addColumn('info','tel');
+get.addColumn('info','name');   //this replace addFamily
 
-get.setMaxVersions(1);  //default is 1
+get.addTimestamp('info','name',1414385447707);
+
+get.addColumn('ecf','name');
+
+get.setMaxVersions(3);  //default 1
+
 
 hbaseClient.get('users',get,function(err,data){ 
     //get users table
