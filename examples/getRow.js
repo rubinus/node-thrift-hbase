@@ -10,7 +10,7 @@ var config = {
 
 var hbaseClient = HBase.client(config);
 
-hbaseClient.getRow('users','row1',['info'],1,function(err,data){ //get users table
+hbaseClient.getRow('users','row1',['info:name','ecf'],1,function(err,data){ //get users table
     if(err){
         console.log('error:',err);
         return;
