@@ -430,8 +430,10 @@ hbaseClient.scanRow('users','row1','row1b',function(err,data){
 });
 
 ```
- 
+
+
  ##scanRow(table,startRow,stopRow,colmuns,callback)##
+
 
 ```javascript
 
