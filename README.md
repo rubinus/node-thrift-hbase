@@ -363,4 +363,107 @@ hbaseClient.delRow('users','row1','info:name',1414137991649,function(err){
 ```
 
 <br>
+#6 . Use scan or scanRow function to query data
+<br>
+
+```javascript
+
+var scan = hbaseClient.Scan();
+
+//get.addFamily('cf');  //add not found column is error
+
+scan.addFamily('info');  //add all family
+
+scan.addStartRow('row1');   //start rowKey
+
+scan.addStopRow('row1p');   //stop rowKey
+
+scan.addColumn('info','name');  //add family and qualifier
+
+scan.addColumn('ecf','name');   //add other family
+
+scan.setMaxVersions(1); //set maxversions
+
+scan.addNumRows(10); //search how much number rows
+
+hbaseClient.scan('users',scan,function(err,data){ //get users table
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    console.log(err,data);
+
+//    console.log(err,data[0].columnValues);
+});
+
+```
+
+##scanRow(table,startRow,stopRow,columns,numRows,callback)##
+<br>
+
+ * //table is search tableName,must 
+ 
+ * //startRow is first rowKey,must
+ 
+ * //stopRow is end rowKey,must
+ 
+ * //columns is family or family and qualifier,is not must
+   //example : ['info:name','ecf']
+
+ * //numRows is count rows, is not must,if none the default is 10.
+ 
+ * //callback is function
+ 
+##scanRow(table,startRow,stopRow,callback)##
+
+```javascript
+
+hbaseClient.scanRow('users','row1','row1b',function(err,data){ 
+    //get users table
+    
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    
+    console.log(err,data);
+});
+
+```
+ 
+ ##scanRow(table,startRow,stopRow,colmuns,callback)##
+
+```javascript
+
+hbaseClient.scanRow('users','row1','row1b',['info:name','ecf'],function(err,data){ 
+    //get users table
+    
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    
+    console.log(err,data);
+});
+
+```
+
+##scanRow(table,startRow,stopRow,columns,numRows,callback)##
+
+```javascript
+
+hbaseClient.scanRow('users','row1','row1b',['info:name','ecf'],10,function(err,data){ 
+    //get users table
+    
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    
+    console.log(err,data);
+});
+
+```
+
+<br>
 <br>

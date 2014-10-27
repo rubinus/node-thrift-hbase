@@ -1,0 +1,45 @@
+/**
+ * Created by rubinus on 14-10-20.
+ */
+var HBase = require('../');
+
+var config = {
+    host: 'master',
+    port: 9090
+};
+
+var hbaseClient = HBase.client(config);
+
+var scan = hbaseClient.Scan();
+
+//get.addFamily('cf');  //add not found column is error
+
+scan.addFamily('info');  //add all family
+
+scan.addStartRow('row1');   //start rowKey
+
+scan.addStopRow('row1p');   //stop rowKey
+
+scan.addColumn('info','name');  //add family and qualifier
+
+scan.addColumn('ecf','name');   //add other family
+
+scan.setMaxVersions(1); //set maxversions
+
+//scan.addNumRows(10); //search how much number rows
+
+hbaseClient.scan('users',scan,function(err,data){ //get users table
+    if(err){
+        console.log('error:',err);
+        return;
+    }
+    console.log(err,data);
+
+//    console.log(err,data[0].columnValues);
+});
+
+
+//already run this command
+
+//thrift --gen js:node /install/hbase-0.98.5/hbase-thrift/src/main/resources/org/apache/hadoop/hbase/thrift2/hbase.thrift
+
