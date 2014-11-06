@@ -54,15 +54,29 @@ var get = hbaseClient.Get('row1');    //row1 is rowKey
 
 //get.addFamily('cf');  //add not found column is error
 
-get.addFamily('info');
+//get.addFamily('info');
 
-get.addColumn('info','name');   //this replace addFamily
+//get.addColumn('info','name');   //this replace addFamily
 
-get.addTimestamp('info','name',1414385447707);
+//get.addTimestamp('info','name',1414385447707);
 
-get.addColumn('ecf','name');
+//get.addColumn('ecf','name');
 
-get.setMaxVersions(3);  //default 1
+//get.setMaxVersions(3);  //default 1
+
+//or Recommend this function add
+
+get.add('info');    //get all family info
+
+get.add('info','name');   //get family and qualifier info:name
+
+get.add('info','name',1414385447707); //get info:name and timestamp
+
+get.add('ecf'); //get other family ecf
+
+get.add('ecf','name');  //get family and qualifier ecf:name
+
+get.add('ecf','name',1414385555890); //get info:name and timestamp
 
 
 hbaseClient.get('users',get,function(err,data){ 
@@ -377,15 +391,33 @@ var scan = hbaseClient.Scan();
 
 //get.addFamily('cf');  //add not found column is error
 
-scan.addFamily('info');  //add all family
+//scan.addFamily('info');  //add all family
+
+//scan.addStartRow('row1');   //start rowKey
+
+//scan.addStopRow('row1p');   //stop rowKey
+
+//scan.addColumn('info','name');  //add family and qualifier
+
+//scan.addColumn('ecf','name');   //add other family
+
+//scan.setMaxVersions(1); //set maxversions
+
+//scan.addNumRows(10); //search how much number rows
+
+//or Recommend this function add
 
 scan.addStartRow('row1');   //start rowKey
 
 scan.addStopRow('row1p');   //stop rowKey
 
-scan.addColumn('info','name');  //add family and qualifier
+scan.add('info');    //scan all family info
 
-scan.addColumn('ecf','name');   //add other family
+scan.add('info','name');   //scan family and qualifier info:name
+
+scan.add('ecf'); //scan other family ecf
+
+scan.add('ecf','name');  //scan family and qualifier ecf:name
 
 scan.setMaxVersions(1); //set maxversions
 

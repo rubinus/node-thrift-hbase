@@ -14,19 +14,29 @@ var scan = hbaseClient.Scan();
 
 //get.addFamily('cf');  //add not found column is error
 
-scan.addFamily('info');  //add all family
-
+//scan.addFamily('info');  //add all family
+//
 scan.addStartRow('row1');   //start rowKey
-
+//
 scan.addStopRow('row1p');   //stop rowKey
+//
+//scan.addColumn('info','name');  //add family and qualifier
+//
+//scan.addColumn('ecf','name');   //add other family
+//
+scan.setMaxVersions(2); //set maxversions
 
-scan.addColumn('info','name');  //add family and qualifier
+scan.addNumRows(10); //search how much number rows
 
-scan.addColumn('ecf','name');   //add other family
 
-scan.setMaxVersions(1); //set maxversions
+//or Recommend this function add
 
-//scan.addNumRows(10); //search how much number rows
+scan.add('info');    //scan all family info
+scan.add('info','name');   //scan family and qualifier info:name
+
+scan.add('ecf'); //scan other family ecf
+scan.add('ecf','name');  //scan family and qualifier ecf:name
+
 
 hbaseClient.scan('users',scan,function(err,data){ //get users table
     if(err){
@@ -35,7 +45,7 @@ hbaseClient.scan('users',scan,function(err,data){ //get users table
     }
     console.log(err,data);
 
-//    console.log(err,data[0].columnValues);
+    console.log(err,data[0].columnValues);
 });
 
 
