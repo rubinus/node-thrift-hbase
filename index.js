@@ -8,6 +8,6 @@
  * Module dependencies.
  */
 
-var Client = require('./lib/client');
+var ClientPool = require('./lib/client');
 
-exports.client = Client.create;
+module.exports = ClientPool;

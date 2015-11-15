@@ -41,7 +41,10 @@ var config = {
 
 };
 
-var hbaseClient = HBase.client(config);
+var hbasePool = HBase(config);
+hbasePool.acquire(function (err, hbaseClient) {
+    ...
+});
 
 ```
 #2 . Use get or getRow function to query data
