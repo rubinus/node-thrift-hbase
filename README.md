@@ -35,15 +35,29 @@ var HBase = require('node-thrift-hbase');
 
 var config = {
 
-    host: 'master',
+    host: ['host1','host2'],
 
     port: 9090
 
 };
 
 var hbasePool = HBase(config);
+//acquire client to HBase
 hbasePool.acquire(function (err, hbaseClient) {
-    ...
+    if(err)
+        console.log('error:',err);
+    hbaseClient.getRow('users','row1',['info:name','ecf'],1,function(err,data){ //get users table
+        if(err){
+            console.log('error:',err);
+            //destroy client on error
+            hbasePool.destroy(hbaseClient);
+            return;
+        }
+        //release client in the end of use.
+        hbasePool.release(hbaseClient);
+        console.log(err,data);
+    });
+
 });
 
 ```
