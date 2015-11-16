@@ -1,7 +1,3 @@
-
-![](http://dailyjs.com/images/posts/nodehbase.png)
-
-
 #Use thrift2 to CRUD for hbase#
 <br>
 
@@ -41,7 +37,8 @@ var config = {
 
 };
 
-var hbasePool = HBase(config);
+var hbaseService = HBase(config);
+var hbasePool = hbaseService.clientPool;
 //acquire client to HBase
 hbasePool.acquire(function (err, hbaseClient) {
     if(err)
