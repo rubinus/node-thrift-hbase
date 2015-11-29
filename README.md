@@ -30,11 +30,9 @@
 var HBase = require('node-thrift-hbase');
 
 var config = {
-
     host: ['host1','host2'],
-
-    port: 9090
-
+    port: 9090,
+    timeout:1000
 };
 
 var hbaseService = HBase(config);
@@ -123,7 +121,7 @@ hbaseClient.get('users',get,function(err,data){
 ###getRow( table, rowKey, callback)###
 
 ```javascript
-hbaseClient.getRow('users','row1',function(err,data){ 
+hbaseService.getRow('users','row1',function(err,data){
     //get users table
 
     if(err){
