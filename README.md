@@ -1,4 +1,5 @@
 #Use thrift2 to CRUD for hbase#
+Compiled using Thrift 0.9.3 for HBase version 0.98.4
 <br>
 
 ##Get ready for start hadoop hbase thrift2
