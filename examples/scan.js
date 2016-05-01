@@ -16,9 +16,9 @@ var scan = hbaseClient.Scan();
 
 //scan.addFamily('info');  //add all family
 //
-scan.addStartRow('row1');   //start rowKey
+scan.setStartRow('row1');   //start rowKey
 //
-scan.addStopRow('row1p');   //stop rowKey
+scan.setStopRow('row1p');   //stop rowKey
 //
 //scan.addColumn('info','name');  //add family and qualifier
 //
@@ -26,7 +26,7 @@ scan.addStopRow('row1p');   //stop rowKey
 //
 scan.setMaxVersions(2); //set maxversions
 
-scan.addNumRows(10); //search how much number rows
+scan.setLimit(10); //search how much number rows
 
 
 //or Recommend this function add
