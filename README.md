@@ -1,8 +1,5 @@
-
-![](http://dailyjs.com/images/posts/nodehbase.png)
-
-
 #Use thrift2 to CRUD for hbase#
+Compiled using Thrift 0.9.3 for HBase version 0.98.4
 <br>
 
 ##Get ready for start hadoop hbase thrift2
@@ -31,17 +28,33 @@
 ##1 . create Hbase instance client##
 
 ```javascript
-var HBase = require('node-thrift-hbase');
+var HBase = require('node-thrift2-hbase');
 
 var config = {
-
-    host: 'master',
-
-    port: 9090
-
+    host: ['host1','host2'],
+    port: 9090,
+    timeout:1000
 };
 
-var hbaseClient = HBase.client(config);
+var hbaseService = HBase(config);
+var hbasePool = hbaseService.clientPool;
+//acquire client to HBase
+hbasePool.acquire(function (err, hbaseClient) {
+    if(err)
+        console.log('error:',err);
+    hbaseClient.getRow('users','row1',['info:name','ecf'],1,function(err,data){ //get users table
+        if(err){
+            console.log('error:',err);
+            //destroy client on error
+            hbasePool.destroy(hbaseClient);
+            return;
+        }
+        //release client in the end of use.
+        hbasePool.release(hbaseClient);
+        console.log(err,data);
+    });
+
+});
 
 ```
 #2 . Use get or getRow function to query data
@@ -109,7 +122,7 @@ hbaseClient.get('users',get,function(err,data){
 ###getRow( table, rowKey, callback)###
 
 ```javascript
-hbaseClient.getRow('users','row1',function(err,data){ 
+hbaseService.getRow('users','row1',function(err,data){
     //get users table
 
     if(err){

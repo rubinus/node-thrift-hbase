@@ -1,13 +1,5 @@
-/**
- * Created by rubinus on 14-10-20.
- */
-
 "use strict";
 
-/**
- * Module dependencies.
- */
+var Service = require('./lib/service');
 
-var Client = require('./lib/client');
-
-exports.client = Client.create;
+module.exports = Service;
